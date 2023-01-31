@@ -169,3 +169,68 @@ int main()
     
     return 0;
 }
+
+/****************************************************************
+1-16 모든 행의 길이와 문자 출력
+*****************************************************************/
+
+#include <stdio.h>
+#define MAXLINE 1000
+
+int getlined(char [], int );
+void copy(char [], char []);
+
+int getlined(char s[], int lim)
+{
+    int c, i;
+    i = 0;
+    for(; i < lim-1 && (c = getchar()) != EOF && c != '\n' ; ++i)
+    {
+        s[i] = c;
+    }
+
+    if (c == '\n') 
+    {
+        s[i] = c;
+        ++i;
+    }
+
+    s[i] = '\0';
+
+    return i;
+}
+
+void copy(char to[], char from[])
+{
+    int i;
+    i = 0;
+    
+    while((to[i] = from[i]) != '\0')
+    {
+        ++i;
+    }
+}
+
+int main()
+{
+    int len, max;
+    char line[MAXLINE];
+    char longest[MAXLINE];
+
+    max = 0;
+
+    while ((len = getlined(line, MAXLINE)) > 0) 
+    {
+        if(len > max)
+        {
+            max = len;
+            copy(longest, line);
+        }
+        
+    }
+    
+    if (max > 0)
+    {
+        printf("%s", longest);
+    }
+}
